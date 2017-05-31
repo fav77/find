@@ -16,12 +16,12 @@ public class Find {
         for (int i = 0; i < dirs.length; i++) {
             String fullName;
             if (dirs[i].equals(fileName)) {
-                fullName = directory + "\\" + dirs[i];
+                fullName = directory;
             } else {
-                fullName = directory + "\\" + dirs[i] + "\\" + fileName;
+                fullName = directory + "/" + dirs[i];
             }
-            if (new File(fullName).isFile()) {
-                return fullName;
+            if (new File(fullName + "/" + fileName).isFile()) {
+                return fullName + "/" + fileName;
             }
             fullName = searchin(fullName, fileName);
         }
@@ -30,7 +30,7 @@ public class Find {
 
     private String search(String dir, String fileName) {
         File file = new File(dir);
-        String fullName = dir + "\\" + fileName;
+        String fullName = dir + "/" + fileName;
         if (new File(fullName).isFile()) {
             return fullName;
         }
@@ -40,10 +40,10 @@ public class Find {
     public File find(String fileName){
         String result = "";
         File file = new File(directory);
-        if(useSubdirectory){
+        if (useSubdirectory){
             result = searchin(directory, fileName);
         }
-        else{
+        else {
             result = search(directory, fileName);
         }
         //if (result.equals("ERROR")) Завершить

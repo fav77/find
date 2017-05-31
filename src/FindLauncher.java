@@ -34,12 +34,15 @@ public class FindLauncher {
             }
             Find find = new Find(outputFile, useSubdirectories);
             try (BufferedReader reader = new BufferedReader(new FileReader(find.find(fileName)))){
+                BufferedWriter writer = new BufferedWriter(new FileWriter("files/output.txt"));
                 String line = reader.readLine();
                 while (line != null) {
                     System.out.println(line);
+                    writer.write(line);
+                    writer.newLine();
                     line = reader.readLine();
                 }
-
+                writer.close();
             }
             System.out.println("Done") ;
         }
